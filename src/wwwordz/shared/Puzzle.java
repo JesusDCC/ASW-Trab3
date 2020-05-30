@@ -7,10 +7,15 @@ public class Puzzle implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private static List<Solution> solutions;
-	private static Table table;
 
+	private static final long serialVersionUID = 1L;
+	private List<Solution> solutions;
+	private Table table;
+
+	public Puzzle() {
+		
+	}
+	
 	public List<Solution> getSolutions(){
 		return this.solutions;
 	}
@@ -24,7 +29,11 @@ public class Puzzle implements Serializable {
 		this.table = table;
 	}
 	//Nested class Solution
-	public static class Solution{
+	public static class Solution implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private List<Table.Cell> cells;
 		private String word;
 		public Solution() {

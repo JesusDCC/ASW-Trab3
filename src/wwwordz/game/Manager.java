@@ -14,15 +14,16 @@ import wwwordz.shared.WWWordzException;
 public class Manager implements WWWordzService {
 	
 	static final long INITIAL_TIME = 0;
-	static Manager manager;
 	Round round;
-	private static java.util.concurrent.ScheduledExecutorService worker = Executors.newScheduledThreadPool(1);	private static Manager instance = null;
+	private static java.util.concurrent.ScheduledExecutorService worker = Executors.newScheduledThreadPool(1);	
+	private static Manager instance = null;
 	
 	private Manager() {
+		round = new Round();
 		worker.scheduleAtFixedRate(()->{
 	            System.out.println("hi there at: "+ new java.util.Date());
 	            round = new Round();
-	        }, 0, Round.getRoundDuration() , TimeUnit.MILLISECONDS);
+	        }, Round.getRoundDuration(), Round.getRoundDuration() , TimeUnit.MILLISECONDS);
 	}
 	public static Manager getInstance() {
 		if(instance == null){

@@ -10,14 +10,14 @@ import wwwordz.shared.WWWordzException;
 
 public interface WWWordzServiceAsync {
 
-	void timeToNextPlay(AsyncCallback<Long> callback) throws WWWordzException;
+	void timeToNextPlay(AsyncCallback<Long> callback) ;
 
-	void register(String nick, String password, AsyncCallback<Long> callback) throws WWWordzException;	
+	void register(String nick, String password, AsyncCallback<Long> callback) ;	
 	
-	void getPuzzle(AsyncCallback<Puzzle> callback) throws WWWordzException;
+	void getPuzzle(AsyncCallback<Puzzle> callback) ;
 
-	void setPoints(String nick, int points, AsyncCallback<Void> callback) throws WWWordzException;
+	void setPoints(String nick, int points, AsyncCallback<Void> callback) ;
 
-	void getRanking(AsyncCallback<List<Rank>> callback) throws WWWordzException;
+	void getRanking(AsyncCallback<List<Rank>> callback);
 
 }

@@ -119,7 +119,11 @@ public class Table implements Serializable, Iterable<Table.Cell>{
 		return true;
 	}
 	//NESTED CLASS CELL
-	public class Cell{
+	public static class Cell implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private int column;
 		private char letter;
 		private int row;

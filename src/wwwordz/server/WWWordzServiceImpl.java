@@ -9,13 +9,22 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import wwwordz.client.WWWordzService;
 import wwwordz.game.Manager;
 import wwwordz.game.Round;
+import wwwordz.shared.Configs;
 import wwwordz.shared.Puzzle;
 import wwwordz.shared.Rank;
 import wwwordz.shared.WWWordzException;
 
 
 public class WWWordzServiceImpl extends RemoteServiceServlet implements WWWordzService {
+	static {
+	    Round.setJoinStageDuration(Configs.JOIN_STAGE_DURATION);
+	    Round.setPlayStageDuration(Configs.PLAY_STAGE_DURATION);
+	    Round.setRankingStageSuration(Configs.RANKING_STAGE_DURATION);
+	    Round.setReportStageDuration(Configs.REPORT_STAGE_DURATION);
+	  }
 	Manager manager = Manager.getInstance();
+	
+
 	
 	@Override
 	public long timeToNextPlay() {

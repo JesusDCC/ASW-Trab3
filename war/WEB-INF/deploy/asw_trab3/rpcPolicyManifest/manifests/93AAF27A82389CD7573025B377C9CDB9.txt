@@ -1,2 +1,0 @@
-serviceClass: wwwordz.client.WWWordzService
-path: 5966F6538FAC5B303F9AB508B899500A.gwt.rpc

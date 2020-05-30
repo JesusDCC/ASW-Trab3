@@ -12,6 +12,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -19,7 +20,8 @@ import com.google.gwt.user.client.ui.LongBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
+import wwwordz.client.LoginPanel;
+import wwwordz.client.GamePanel;
 /**
  * TO DO
  * CRIAR DIV NO HTML P PAINEL COM TODOS OS PAINEIS
@@ -52,129 +54,14 @@ public class ASW_Trab3 implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
-		final TextBox nameField = new TextBox();
-		final TextBox passField = new TextBox();
-		final HTML serverResponseLabel = new HTML();
-
-		passField.setText("Passowrd");
-		nameField.setText("User Name");
-		final Label errorLabel = new Label();
-
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
-
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("passFieldContainer").add(passField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
-		RootPanel.get("errorLabelContainer").add(errorLabel);
-		
-		
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
-		
-		/*
-	
-		dialogBox.setText("Remote Procedure Call");
-		
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-		final Label userToServerLabel = new Label();
-		final Label passToServerLabel = new Label();
-		final HTML serverResponseLabel = new HTML();
-	
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-		dialogVPanel.add(ToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-		dialogVPanel.add(serverResponseLabel);
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
+		final DeckPanel panels = new DeckPanel(); 
+		RootPanel.get("panel").add(panels);
+		final LoginPanel login = new LoginPanel(panels,wwwordzService);
+		final GamePanel game = new GamePanel(panels,wwwordzService); 
+		panels.add(login);
+		panels.add(game);
+		panels.showWidget(0);
 		
 
-		// Add a handler to close the DialogBox
-		closeButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				dialogBox.hide();
-				sendButton.setEnabled(true);
-				sendButton.setFocus(true);
-			}
-		});
-		*/
-
-		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler {
-			/**
-			 * Fired when the user clicks on the sendButton.
-			 */
-			public void onClick(ClickEvent event) {
-				sendNameToServer();
-			}
-
-			/**
-			 * Fired when the user types in the nameField.
-			 */
-			public void onKeyUp(KeyUpEvent event) {
-				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					sendNameToServer();
-				}
-			}
-
-			/**
-			 * Send the name from the nameField to the server and wait for a response.
-			 */
-			private void sendNameToServer() {
-				// First, we validate the input.
-				errorLabel.setText("");
-				String userToServer = nameField.getText();
-				String passToServer = passField.getText();
-				/*if (!FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
-					return;
-				}*/
-
-				// Then, we send the input to the server.
-				sendButton.setEnabled(false);
-				try {
-					wwwordzService.register(userToServer,passToServer, new AsyncCallback<Long>() {
-						public void onFailure(Throwable caught) {
-							System.out.println("aaaaaaaaaaaa");
-							/*// Show the RPC error message to the user
-							dialogBox.setText("Remote Procedure Call - Failure");
-							serverResponseLabel.addStyleName("serverResponseLabelError");
-							serverResponseLabel.setHTML(SERVER_ERROR);
-							dialogBox.center();
-							closeButton.setFocus(true);*/
-						}
-
-						public void onSuccess(Long result) {
-							System.out.println("slaslalsas");
-							
-						}
-					});
-				} catch (WWWordzException e) {
-					System.out.println("slaslalsas");
-					dialogBox.setText("Remote Procedure Call - Failure");
-					serverResponseLabel.addStyleName("Invalid user");
-					serverResponseLabel.setHTML(SERVER_ERROR);
-					dialogBox.center();
-					closeButton.setFocus(true);
-					e.printStackTrace();
-				}
-			}
-		}
-
-		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();
-		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
 	}
 }

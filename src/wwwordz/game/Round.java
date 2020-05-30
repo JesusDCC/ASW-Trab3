@@ -9,8 +9,11 @@ import java.util.*;
 public class Round {
 	
 	long startTime = System.currentTimeMillis();
-	
-	Date end;
+	private java.util.Date joinn = new Date();
+	private java.util.Date playy = new Date(joinn.getTime()   + getJoinStageDuration());
+	private java.util.Date reportt = new Date(playy.getTime()   + getPlayStageDuration());
+	private java.util.Date rankingg = new Date(reportt.getTime() + getReportStageDuration());
+	private java.util.Date endd = new Date(rankingg.getTime()+ getRankingStageSuration());
 	static Date join;
 	static Date play;
 	static Date report;
@@ -20,7 +23,11 @@ public class Round {
 	List<Rank> lista = new ArrayList<Rank>();
 	
 	Generator generator = new Generator();
-	Puzzle puzzle = generator.random();
+	Puzzle puzzle = generator.generate();
+	
+	public Round() {
+		puzzle = generator.generate();
+	}
 
 	public static long getJoinStageDuration() {
 		return join.getTime();
@@ -62,19 +69,20 @@ public class Round {
 	public long getTimetoNextPlay() {
 		
 		long curTime = System.currentTimeMillis();
-		 
-		if(curTime < getPlayStageDuration() + startTime) {
-			return (getPlayStageDuration() + startTime) - curTime;
+		Date temp = new Date(); 
+		if(temp.before(playy)) {
+			return playy.getTime()-temp.getTime();
 		}
 		
-		return startTime + getRoundDuration() - curTime +  getJoinStageDuration();
+		return endd.getTime()-temp.getTime()+ getJoinStageDuration();
 	}
 
 	public long register(String nick, String password) throws WWWordzException {
 		long aux = System.currentTimeMillis();
 		Players p = Players.getInstance();
+		Date temp = new Date();
 		
-		if(aux > getJoinStageDuration() + startTime) {
+		if(temp.after(playy)) {
 			throw new WWWordzException("  nao esta na fase de join ");
 		}
 		
@@ -85,14 +93,14 @@ public class Round {
 		Player paux = new Player(nick, password);
 		roundPlayers.put(nick, paux);
 		
-		return startTime + getRoundDuration() - aux;
+		return playy.getTime()-temp.getTime();
 	}
 
 	public Puzzle getPuzzle() throws WWWordzException {
 		
 		long aux = System.currentTimeMillis();
-		
-		if(aux < startTime + getJoinStageDuration() || aux > startTime + getJoinStageDuration() + getPlayStageDuration()) {
+		Date temp = new Date();
+		if(temp.before(playy) || temp.after(reportt)) {
 			throw new WWWordzException(" not in play stage ");
 		} 
 		
@@ -101,8 +109,8 @@ public class Round {
 
 	public void setPoints(String nick, int i) throws WWWordzException{
 		long aux = System.currentTimeMillis();
-		
-		if(aux > startTime + getJoinStageDuration() + getPlayStageDuration() +  getReportStageDuration() || aux < startTime + getJoinStageDuration() + getPlayStageDuration()) {
+		Date temp = new Date();
+		if(temp.before(reportt) || temp.after(rankingg)) {
 			throw new WWWordzException("  not in report stage ");
 		}
 		
@@ -120,8 +128,8 @@ public class Round {
 
 	public List<Rank> getRanking() throws WWWordzException{
 		long aux = System.currentTimeMillis();
-
-		if(aux < startTime + getJoinStageDuration() + getPlayStageDuration() + getReportStageDuration() ) {
+		Date temp = new Date();
+		if( temp.before(rankingg)) {
 			throw new WWWordzException("  not in ranking stage ");
 		}
 		
