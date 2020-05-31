@@ -81,7 +81,7 @@ public class LoginPanel extends Composite{
 				Timer t = new Timer() {
 					@Override
 					public void run() {
-						((GamePanel) panels.getWidget(1)).fillGame(panels,wwwordzSerivce);
+						((GamePanel) panels.getWidget(1)).fillGame(user,panels,wwwordzSerivce);
 						panels.showWidget(1); 
 					}
 				};
