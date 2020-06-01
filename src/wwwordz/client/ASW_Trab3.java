@@ -20,8 +20,8 @@ import com.google.gwt.user.client.ui.LongBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import wwwordz.client.LoginPanel;
-import wwwordz.client.GamePanel;
+
+import wwwordz.client.panels.GamePanel;
 /**
  * TO DO
  * CRIAR DIV NO HTML P PAINEL COM TODOS OS PAINEIS
@@ -30,6 +30,8 @@ import wwwordz.client.GamePanel;
  * CLASS RANKING
  * CLASS GAME
  */
+import wwwordz.client.panels.LoginPanel;
+import wwwordz.client.panels.RankingPanel;
 
 
 
