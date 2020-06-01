@@ -54,12 +54,17 @@ public class ASW_Trab3 implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		//create our main panel
 		final DeckPanel panels = new DeckPanel(); 
 		RootPanel.get("panel").add(panels);
+		//create our stage panels
 		final LoginPanel login = new LoginPanel(panels,wwwordzService);
 		final GamePanel game = new GamePanel(panels,wwwordzService); 
+		final RankingPanel ranking = new RankingPanel(panels,wwwordzService);
+		//add stage panels to main panel
 		panels.add(login);
 		panels.add(game);
+		panels.add(ranking);
 		panels.showWidget(0);
 		
 

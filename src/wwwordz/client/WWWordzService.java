@@ -1,5 +1,6 @@
 package wwwordz.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -20,6 +21,6 @@ public interface WWWordzService extends RemoteService {
 
 	void setPoints(String nick, int points) throws WWWordzException;
 
-	List<Rank> getRanking() throws WWWordzException;
+	ArrayList<Rank> getRanking() throws WWWordzException;
 
 }

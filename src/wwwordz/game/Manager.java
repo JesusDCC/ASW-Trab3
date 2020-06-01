@@ -54,7 +54,7 @@ public class Manager implements WWWordzService {
 	}
 	
 	@Override
-	public List<Rank> getRanking() throws WWWordzException {
+	public ArrayList<Rank> getRanking() throws WWWordzException {
 		return round.getRanking();
 	}
 

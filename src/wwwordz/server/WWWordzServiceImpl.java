@@ -1,4 +1,5 @@
 package wwwordz.server;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -47,7 +48,7 @@ public class WWWordzServiceImpl extends RemoteServiceServlet implements WWWordzS
 	}
 	
 	@Override
-	public List<Rank> getRanking() throws WWWordzException {
+	public ArrayList<Rank> getRanking() throws WWWordzException {
 		return manager.getRanking();
 	}
 }

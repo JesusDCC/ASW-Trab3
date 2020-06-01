@@ -20,7 +20,7 @@ public class Round {
 	static Date ranking;
 	
 	Map<String, Player> roundPlayers = new HashMap<>();
-	List<Rank> lista = new ArrayList<Rank>();
+	ArrayList<Rank> lista = new ArrayList<Rank>();
 	
 	Generator generator = new Generator();
 	Puzzle puzzle = generator.generate();
@@ -117,6 +117,7 @@ public class Round {
 		Player paux = roundPlayers.get(nick);
 		roundPlayers.remove(nick);
 		paux.points = i;
+		paux.accumulated += i;
 		roundPlayers.put(nick, paux);	
 		
 		Rank rank = new Rank(paux.nick, paux.points, paux.accumulated);
@@ -126,7 +127,7 @@ public class Round {
 		
 	}
 
-	public List<Rank> getRanking() throws WWWordzException{
+	public ArrayList<Rank> getRanking() throws WWWordzException{
 		long aux = System.currentTimeMillis();
 		Date temp = new Date();
 		if( temp.before(rankingg)) {

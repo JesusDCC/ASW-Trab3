@@ -1,5 +1,6 @@
 package wwwordz.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -18,6 +19,6 @@ public interface WWWordzServiceAsync {
 
 	void setPoints(String nick, int points, AsyncCallback<Void> callback) ;
 
-	void getRanking(AsyncCallback<List<Rank>> callback);
+	void getRanking(AsyncCallback<ArrayList<Rank>> callback);
 
 }
